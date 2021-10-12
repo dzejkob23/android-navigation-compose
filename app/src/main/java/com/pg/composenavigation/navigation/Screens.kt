@@ -53,8 +53,8 @@ interface Screen {
 
     }
 
-//    data class Content(
-//        override val route: String,
-//        override val title: String
-//    ) : Screen
+    data class Content(
+        override val route: String,
+        override val title: String
+    ) : Screen
 }
