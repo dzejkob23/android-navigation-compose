@@ -104,10 +104,12 @@ fun NavGraphBuilder.nestedGraph(navController: NavController) {
             SimpleButtonContent(
                 text = screens[2].title,
                 onClickNext = {
-                    // Navigate back to the third bottom tab bar. Also remove the backstack.
+                    // Navigate back to the third bottom tab bar.
                     navController.navigate(Screen.BottomNavigation.BottomNavItem3.route) {
-                        // Add navigation properties
+                        // Add navigation properties.
+                        // Pop up to third bottom tab bar.
                         popUpTo(Screen.BottomNavigation.BottomNavItem3.route) {
+                            // Pop up the tab bar from the back stack.
                             inclusive = true
                         }
                     }
