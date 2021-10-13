@@ -28,10 +28,7 @@ enum class FirstNestedGraph : NavigationDestination {
 fun NavGraphBuilder.firstNestedGraph(navController: NavController) {
     navigation(
         startDestination = FirstNestedGraph.FirstScreen.getRoute(),
-        // route == prefix
-        // if the graph continue in scaffold with bottom navigation bar, this helps to keep
-        // the bottom bar navigation icon selected
-        route = FirstNestedGraph.graphId
+        route = FirstNestedGraph.graphId // something like nested graph name/prefix
     ) {
         composable(FirstNestedGraph.FirstScreen.getRoute()) {
 
