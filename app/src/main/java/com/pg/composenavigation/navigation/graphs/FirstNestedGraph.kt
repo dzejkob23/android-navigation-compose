@@ -1,9 +1,7 @@
 package com.pg.composenavigation.navigation.graphs
 
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
+import androidx.navigation.*
 import androidx.navigation.compose.composable
-import androidx.navigation.navigation
 import com.pg.composenavigation.navigation.NavigationDestination
 import com.pg.composenavigation.navigation.utils.getCurrentRoute
 import com.pg.composenavigation.ui.common.SimpleButtonContent
@@ -32,16 +30,38 @@ fun NavGraphBuilder.firstNestedGraph(navController: NavController) {
         route = MainNavHost.BottomNavItem3.getRoute(), // this keeps third bottom bar icon selected
     ) {
         composable(FirstNestedGraph.FirstScreen.getRoute()) {
+
+            val routeToNextScreen = FirstNestedGraph.SecondScreen.getRoute() +
+                    "/Hello World" +
+                    "?optionalParameter=Nice to meet you..."
+
             SimpleButtonContent(
                 text = FirstNestedGraph.FirstScreen.getTitle(),
-                onClickNext = { navController.navigate(FirstNestedGraph.SecondScreen.getRoute()) },
+                onClickNext = { navController.navigate(routeToNextScreen) },
                 onClickBack = { navController.popBackStack() },
                 route = navController.getCurrentRoute()
             )
         }
-        composable(FirstNestedGraph.SecondScreen.getRoute()) {
+        composable(
+            route = "${FirstNestedGraph.SecondScreen.getRoute()}/{requiredParameter}?optionalParameter={optionalParameter}",
+            arguments = listOf(
+                navArgument("requiredParameter") {
+                    type = NavType.StringType
+                },
+                navArgument("optionalParameter") {
+                    type = NavType.StringType
+                    defaultValue = "NOTHING" // "defaultValue" must be set for optional parameter or set "nullability = true"
+                }
+            )
+        ) { backStackEntry ->
+
+            val requiredParam = backStackEntry.arguments?.getString("requiredParameter")
+            val optionalParam = backStackEntry.arguments?.getString("optionalParameter")
+
             SimpleButtonContent(
-                text = FirstNestedGraph.SecondScreen.getTitle(),
+                text = "Title: ${FirstNestedGraph.SecondScreen.getTitle()}\n" +
+                        "Required parameter: $requiredParam\n" +
+                        "Optional parameter: $optionalParam",
                 onClickNext = { navController.navigate(FirstNestedGraph.ThirdScreen.getRoute()) },
                 onClickBack = { navController.popBackStack() },
                 route = navController.getCurrentRoute()
