@@ -23,7 +23,7 @@ enum class FirstNestedGraph : NavigationDestination {
     override fun getRoute(): String = name
 }
 
-fun NavGraphBuilder.nestedGraph(navController: NavController) {
+fun NavGraphBuilder.firstNestedGraph(navController: NavController) {
     navigation(
         startDestination = FirstNestedGraph.FirstScreen.getRoute(),
         // route == prefix

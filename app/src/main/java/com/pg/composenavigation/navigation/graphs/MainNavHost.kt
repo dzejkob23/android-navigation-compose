@@ -71,6 +71,6 @@ fun MainScreenNavHost(
         }
 
         // Nested navigation graph
-        nestedGraph(navController)
+        firstNestedGraph(navController)
     }
 }
