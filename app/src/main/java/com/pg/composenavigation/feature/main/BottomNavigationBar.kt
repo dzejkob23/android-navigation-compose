@@ -12,35 +12,36 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.pg.composenavigation.navigation.Screen
+import com.pg.composenavigation.navigation.BottomNavigationDestination
+import com.pg.composenavigation.navigation.graphs.MainNavHost
 import com.pg.composenavigation.ui.theme.ComposeNavigationTheme
 
 @Composable
 fun BottomNavigationBar(
     navController: NavHostController,
-    bottomNavigationItems: List<Screen.BottomNavigation>
+    bottomNavigationItems: List<BottomNavigationDestination>
 ) {
     BottomNavigation {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
 
-        bottomNavigationItems.forEach { screen ->
+        bottomNavigationItems.forEach { item ->
 
             BottomNavigationItem(
                 icon = {
                     Icon(
-                        imageVector = screen.icon,
-                        contentDescription = "Bottom navigation item: ${screen.title}"
+                        imageVector = item.getIcon(),
+                        contentDescription = "Bottom navigation item: ${item.getTitle()}"
                     )
                 },
                 label = {
-                    Text(text = screen.title)
+                    Text(text = item.getTitle())
                 },
                 selected = currentDestination
                     ?.hierarchy
-                    ?.any { it.route == screen.route } == true,
+                    ?.any { it.route == item.getRoute() } == true,
                 onClick = {
-                    navController.navigate(screen.route) {
+                    navController.navigate(item.getRoute()) {
                         // Pop up to the start destination of the graph to
                         // avoid building up a large stack of destinations
                         // on the back stack as users select items
@@ -65,11 +66,7 @@ private fun BottomNavigationBarPreview() {
     ComposeNavigationTheme {
         BottomNavigationBar(
             navController = rememberNavController(),
-            bottomNavigationItems = listOf(
-                Screen.BottomNavigation.BottomNavItem1,
-                Screen.BottomNavigation.BottomNavItem2,
-                Screen.BottomNavigation.BottomNavItem3
-            )
+            bottomNavigationItems = MainNavHost.values().toList()
         )
     }
 }
