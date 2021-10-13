@@ -19,6 +19,10 @@ enum class FirstNestedGraph : NavigationDestination {
     };
 
     override fun getRoute(): String = name
+
+    companion object {
+        const val graphId = "FirstNestedGraph"
+    }
 }
 
 fun NavGraphBuilder.firstNestedGraph(navController: NavController) {
@@ -27,7 +31,7 @@ fun NavGraphBuilder.firstNestedGraph(navController: NavController) {
         // route == prefix
         // if the graph continue in scaffold with bottom navigation bar, this helps to keep
         // the bottom bar navigation icon selected
-        route = MainNavHost.BottomNavItem3.getRoute(), // this keeps third bottom bar icon selected
+        route = FirstNestedGraph.graphId
     ) {
         composable(FirstNestedGraph.FirstScreen.getRoute()) {
 

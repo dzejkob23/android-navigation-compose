@@ -54,16 +54,16 @@ fun MainScreenNavHost(
         // Each "composable" is definition of a route to the current screen (content).
         // Definition 1
         composable(MainNavHost.BottomNavItem1.getRoute()) {
-            SimpleContent(MainNavHost.BottomNavItem1.getRoute())
+            SimpleContent(MainNavHost.BottomNavItem1.getTitle())
         }
         // Definition 2
         composable(MainNavHost.BottomNavItem2.getRoute()) {
-            SimpleContent(MainNavHost.BottomNavItem2.getRoute())
+            SimpleContent(MainNavHost.BottomNavItem2.getTitle())
         }
         // Definition 3
         composable(MainNavHost.BottomNavItem3.getRoute()) {
             SimpleButtonContent(
-                text = MainNavHost.BottomNavItem3.getRoute(),
+                text = MainNavHost.BottomNavItem3.getTitle(),
                 onClickNext = { navController.navigate(FirstNestedGraph.FirstScreen.getRoute()) },
                 onClickBack = { navController.popBackStack() },
                 route = navController.getCurrentRoute()
