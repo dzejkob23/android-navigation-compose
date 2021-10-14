@@ -12,14 +12,13 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.pg.composenavigation.navigation.BottomNavigationDestination
-import com.pg.composenavigation.navigation.graphs.MainNavHost
+import com.pg.composenavigation.navigation.MainNavHost
 import com.pg.composenavigation.ui.theme.ComposeNavigationTheme
 
 @Composable
 fun BottomNavigationBar(
     navController: NavHostController,
-    bottomNavigationItems: List<BottomNavigationDestination>
+    bottomNavigationItems: List<MainNavHost>
 ) {
     BottomNavigation {
         val navBackStackEntry by navController.currentBackStackEntryAsState()

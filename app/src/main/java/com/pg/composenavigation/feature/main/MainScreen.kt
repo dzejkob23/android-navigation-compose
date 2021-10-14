@@ -8,15 +8,14 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.pg.composenavigation.navigation.BottomNavigationDestination
-import com.pg.composenavigation.navigation.graphs.MainNavHost
+import com.pg.composenavigation.navigation.MainNavHost
 import com.pg.composenavigation.navigation.graphs.MainScreenNavHost
 
 @Composable
 fun MainScreen() {
 
     val navController: NavHostController = rememberNavController()
-    val bottomNavigationItems: List<BottomNavigationDestination> = MainNavHost.values().toList()
+    val bottomNavigationItems: List<MainNavHost> = MainNavHost.values().toList()
 
     Scaffold(
         bottomBar = {
@@ -37,7 +36,7 @@ fun MainScreen() {
 }
 
 @Composable
-private fun List<BottomNavigationDestination>.showBottomBarOnScreens(navController: NavHostController): Boolean {
+private fun List<MainNavHost>.showBottomBarOnScreens(navController: NavHostController): Boolean {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     return this
         .filter { it.getRoute() == navBackStackEntry?.destination?.route }
