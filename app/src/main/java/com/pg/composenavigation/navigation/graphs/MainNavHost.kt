@@ -7,6 +7,9 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.pg.composenavigation.feature.item1.Item1Content
+import com.pg.composenavigation.feature.item2.Item2Content
+import com.pg.composenavigation.feature.item3.Item3Content
 import com.pg.composenavigation.navigation.Screen
 import com.pg.composenavigation.navigation.utils.getCurrentRoute
 import com.pg.composenavigation.ui.common.SimpleButtonContent
@@ -40,23 +43,20 @@ fun MainScreenNavHost(
 
 private fun NavGraphBuilder.addRoot1() {
     composable(Screen.MainScreen.Root1.route) {
-        SimpleContent("Item 1")
+        Item1Content()
     }
 }
 
 private fun NavGraphBuilder.addRoot2() {
     composable(Screen.MainScreen.Root2.route) {
-        SimpleContent("Item 2")
+        Item2Content()
     }
 }
 
 private fun NavGraphBuilder.addRoot3(navController: NavController) {
     composable(Screen.MainScreen.Root3.route) {
-        SimpleButtonContent(
-            text = "Item 3",
-            onClickNext = { navController.navigate(Screen.FirstNestedGraph.TestingScreen1.route) },
-            onClickBack = { navController.popBackStack() },
-            route = navController.getCurrentRoute()
+        Item3Content(
+            onClickNext = { navController.navigate(Screen.FirstNestedGraph.TestingScreen1.route) }
         )
     }
 }
