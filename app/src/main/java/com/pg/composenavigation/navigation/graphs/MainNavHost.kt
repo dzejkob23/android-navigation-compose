@@ -11,9 +11,6 @@ import com.pg.composenavigation.feature.item1.Item1Content
 import com.pg.composenavigation.feature.item2.Item2Content
 import com.pg.composenavigation.feature.item3.Item3Content
 import com.pg.composenavigation.navigation.Screen
-import com.pg.composenavigation.navigation.utils.getCurrentRoute
-import com.pg.composenavigation.ui.common.SimpleButtonContent
-import com.pg.composenavigation.ui.common.SimpleContent
 
 @Composable
 fun MainScreenNavHost(

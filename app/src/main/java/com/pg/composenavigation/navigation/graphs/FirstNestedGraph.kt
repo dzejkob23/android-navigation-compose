@@ -2,9 +2,9 @@ package com.pg.composenavigation.navigation.graphs
 
 import androidx.navigation.*
 import androidx.navigation.compose.composable
+import com.pg.composenavigation.feature.item3.Item3Nested1Content
+import com.pg.composenavigation.feature.item3.Item3Nested2Content
 import com.pg.composenavigation.navigation.Screen
-import com.pg.composenavigation.navigation.utils.getCurrentRoute
-import com.pg.composenavigation.ui.common.SimpleButtonContent
 
 fun NavGraphBuilder.firstNestedGraph(navController: NavController) {
     navigation(
@@ -16,13 +16,12 @@ fun NavGraphBuilder.firstNestedGraph(navController: NavController) {
 
         addTestingScreen2(navController)
 
-        addTestingScreen3(navController)
     }
 }
 
 private fun NavGraphBuilder.addTestingScreen1(navController: NavController) {
     composable(Screen.FirstNestedGraph.TestingScreen1.route) {
-        SimpleButtonContent(
+        Item3Nested1Content(
             text = Screen.FirstNestedGraph.TestingScreen1.route,
             onClickNext = {
                 val route =  Screen.FirstNestedGraph.TestingScreen2.createRoute(
@@ -31,8 +30,7 @@ private fun NavGraphBuilder.addTestingScreen1(navController: NavController) {
                 )
                 navController.navigate(route)
             },
-            onClickBack = { navController.popBackStack() },
-            route = navController.getCurrentRoute()
+            onClickBack = { navController.popBackStack() }
         )
     }
 }
@@ -58,21 +56,10 @@ private fun NavGraphBuilder.addTestingScreen2(navController: NavController) {
             Screen.FirstNestedGraph.TestingScreen2.optional
         )
 
-        SimpleButtonContent(
+        Item3Nested2Content(
             text = "Title: ${Screen.FirstNestedGraph.TestingScreen2.route}\n\n" +
                     "Required parameter: $requiredParam\n" +
                     "Optional parameter: $optionalParam",
-            onClickNext = { navController.navigate(Screen.FirstNestedGraph.TestingScreen3.route) },
-            onClickBack = { navController.popBackStack() },
-            route = navController.getCurrentRoute()
-        )
-    }
-}
-
-private fun NavGraphBuilder.addTestingScreen3(navController: NavController) {
-    composable(route = Screen.FirstNestedGraph.TestingScreen3.route) {
-        SimpleButtonContent(
-            text = Screen.FirstNestedGraph.TestingScreen3.route,
             onClickNext = {
                 // Navigate back to the third bottom tab bar.
                 navController.navigate(Screen.MainScreen.Root3.route) {
@@ -84,8 +71,7 @@ private fun NavGraphBuilder.addTestingScreen3(navController: NavController) {
                     }
                 }
             },
-            onClickBack = { navController.popBackStack() },
-            route = navController.getCurrentRoute()
+            onClickBack = { navController.popBackStack() }
         )
     }
 }
