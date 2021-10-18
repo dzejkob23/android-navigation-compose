@@ -4,12 +4,12 @@ import androidx.navigation.*
 import androidx.navigation.compose.composable
 import com.pg.composenavigation.feature.item3.Item3Nested1Content
 import com.pg.composenavigation.feature.item3.Item3Nested2Content
-import com.pg.composenavigation.navigation.Screen
+import com.pg.composenavigation.navigation.NavNode
 
 fun NavGraphBuilder.firstNestedGraph(navController: NavController) {
     navigation(
-        startDestination = Screen.FirstNestedGraph.TestingScreen1.route,
-        route = "FirstNestedGraph" // something like nested graph name/prefix
+        startDestination = NavNode.Item3NestedGraph.TestingScreen1.route,
+        route = NavNode.Root.Item3NestedGraphRoot.route // something like nested graph name/prefix
     ) {
 
         addTestingScreen1(navController)
@@ -20,11 +20,11 @@ fun NavGraphBuilder.firstNestedGraph(navController: NavController) {
 }
 
 private fun NavGraphBuilder.addTestingScreen1(navController: NavController) {
-    composable(Screen.FirstNestedGraph.TestingScreen1.route) {
+    composable(NavNode.Item3NestedGraph.TestingScreen1.route) {
         Item3Nested1Content(
-            text = Screen.FirstNestedGraph.TestingScreen1.route,
+            text = NavNode.Item3NestedGraph.TestingScreen1.route,
             onClickNext = {
-                val route =  Screen.FirstNestedGraph.TestingScreen2.createRoute(
+                val route =  NavNode.Item3NestedGraph.TestingScreen2.createRoute(
                     requiredParam = "Hello World",
                     optionalParam = "Nice to meet you..."
                 )
@@ -37,12 +37,12 @@ private fun NavGraphBuilder.addTestingScreen1(navController: NavController) {
 
 private fun NavGraphBuilder.addTestingScreen2(navController: NavController) {
     composable(
-        route = Screen.FirstNestedGraph.TestingScreen2.route,
+        route = NavNode.Item3NestedGraph.TestingScreen2.route,
         arguments = listOf(
-            navArgument(Screen.FirstNestedGraph.TestingScreen2.required) {
+            navArgument(NavNode.Item3NestedGraph.TestingScreen2.required) {
                 type = NavType.StringType
             },
-            navArgument(Screen.FirstNestedGraph.TestingScreen2.optional) {
+            navArgument(NavNode.Item3NestedGraph.TestingScreen2.optional) {
                 type = NavType.StringType
                 defaultValue = "NOTHING" // "defaultValue" must be set for optional parameter or set "nullability = true"
             }
@@ -50,22 +50,22 @@ private fun NavGraphBuilder.addTestingScreen2(navController: NavController) {
     ) { backStackEntry ->
 
         val requiredParam = backStackEntry.arguments?.getString(
-            Screen.FirstNestedGraph.TestingScreen2.required
+            NavNode.Item3NestedGraph.TestingScreen2.required
         )
         val optionalParam = backStackEntry.arguments?.getString(
-            Screen.FirstNestedGraph.TestingScreen2.optional
+            NavNode.Item3NestedGraph.TestingScreen2.optional
         )
 
         Item3Nested2Content(
-            text = "Title: ${Screen.FirstNestedGraph.TestingScreen2.route}\n\n" +
+            text = "Title: ${NavNode.Item3NestedGraph.TestingScreen2.route}\n\n" +
                     "Required parameter: $requiredParam\n" +
                     "Optional parameter: $optionalParam",
             onClickNext = {
                 // Navigate back to the third bottom tab bar.
-                navController.navigate(Screen.MainScreen.Root3.route) {
+                navController.navigate(NavNode.Root.BottomItem3.route) {
                     // Add navigation properties.
                     // Pop up to third bottom tab bar.
-                    popUpTo(Screen.MainScreen.Root3.route) {
+                    popUpTo(NavNode.Root.BottomItem3.route) {
                         // Pop up the tab bar from the back stack.
                         inclusive = true
                     }

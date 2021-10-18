@@ -10,7 +10,7 @@ import androidx.navigation.compose.composable
 import com.pg.composenavigation.feature.item1.Item1Content
 import com.pg.composenavigation.feature.item2.Item2Content
 import com.pg.composenavigation.feature.item3.Item3Content
-import com.pg.composenavigation.navigation.Screen
+import com.pg.composenavigation.navigation.NavNode
 
 @Composable
 fun MainScreenNavHost(
@@ -20,7 +20,7 @@ fun MainScreenNavHost(
     // This NavHost is similar to the FragmentNavHost.
     NavHost(
         navController = navController,
-        startDestination = Screen.MainScreen.Root1.route,
+        startDestination = NavNode.Root.BottomItem1.route,
         modifier = modifier
     ) {
         // Each "composable" is definition of a route to the current screen (content).
@@ -39,21 +39,21 @@ fun MainScreenNavHost(
 }
 
 private fun NavGraphBuilder.addRoot1() {
-    composable(Screen.MainScreen.Root1.route) {
+    composable(NavNode.Root.BottomItem1.route) {
         Item1Content()
     }
 }
 
 private fun NavGraphBuilder.addRoot2() {
-    composable(Screen.MainScreen.Root2.route) {
+    composable(NavNode.Root.BottomItem2.route) {
         Item2Content()
     }
 }
 
 private fun NavGraphBuilder.addRoot3(navController: NavController) {
-    composable(Screen.MainScreen.Root3.route) {
+    composable(NavNode.Root.BottomItem3.route) {
         Item3Content(
-            onClickNext = { navController.navigate(Screen.FirstNestedGraph.TestingScreen1.route) }
+            onClickNext = { navController.navigate(NavNode.Item3NestedGraph.TestingScreen1.route) }
         )
     }
 }
